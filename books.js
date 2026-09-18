@@ -1,18 +1,18 @@
-import { baseURL } from "./firebaserequests.js";
+import { baseURL, postBook } from "./firebaserequests.js";
 export class Books {
     #id;
     #title;
     #author;
     #isRead;
-    #ratings;
+    #rating;
     #url
 
-    constructor(id, title, author, isRead, ratings) {
+    constructor(id, title, author, isRead, rating) {
         this.#id = id;
         this.#title = title;
         this.#author = author;
         this.#isRead = isRead;
-        this.#ratings = ratings;
+        this.#rating = rating;
         this.#url = `${baseURL}/${this.#id}.json`;
     }
 
@@ -71,7 +71,8 @@ export class Books {
         return this.#isRead;
     }
 
-    getRatings() {
-        return this.#ratings;
+    getRating() {
+        return this.#rating;
     }
 }
+

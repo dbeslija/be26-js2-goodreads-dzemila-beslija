@@ -4,7 +4,7 @@ export async function postBook(newBook) {
     try {
         const option = {
             method: 'POST',
-            body: JSON.stringify({ book: newBook, isRead: false }),
+            body: JSON.stringify(newBook),
             headers: {
                 'Content-type': 'application/json'
             }

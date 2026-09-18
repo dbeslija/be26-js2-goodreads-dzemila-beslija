@@ -10,11 +10,14 @@
     <h1>Goodreads</h1>
     <div>
         <p>BOOKS</p>
+        <ul id="bookList"></ul>
     </div>
-    <form>
-        <input type="text" placeholder="Author" required>
-        <input type="text" placeholder="Title" required>
-        <input type="number" placeholder="Rating" min="1" max="5">
+    <form id="bookForm">
+        <input type="text" id="author" placeholder="Author" required>
+        <input type="text" id="title" placeholder="Title" required>
+        <label for="isRead">Read</label>
+        <input type="checkbox" id="isRead">
+        <input type="number" id="rating" placeholder="Rating" min="1" max="5" disabled>
         <button type="submit">Add Book</button>
     </form>
 </body>
