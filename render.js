@@ -21,6 +21,16 @@ export function createBookCard(book) {
     }
     delBtn.innerText = 'Remove book';
 
+delBtn.addEventListener('click', async () => {
+    try {
+        await book.deleteBook();
+        cardDiv.remove();
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+
     return cardDiv;
 }
 
