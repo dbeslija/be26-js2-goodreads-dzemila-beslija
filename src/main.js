@@ -4,16 +4,16 @@ import { showAllBooks } from "./render.js";
 const form = document.querySelector('#bookForm');
 const bookList = document.querySelector('#bookList');
 const isReadCheckBox = document.querySelector('#isRead');
-const ratingInput = document.querySelector('#rating');
+const scoreInput = document.querySelector('#score');
 
 
 isReadCheckBox.addEventListener('change', () => {
-    ratingInput.disabled = !isReadCheckBox.checked;
+    scoreInput.disabled = !isReadCheckBox.checked;
     if (!isReadCheckBox.checked) {
-        ratingInput.value = ''
+        scoreInput.value = '';
     }
-}
-)
+});
+
 
 async function loadBooks() {
     try {
@@ -32,14 +32,14 @@ form.addEventListener('submit', async event => {
         author: document.querySelector('#author').value,
         title: document.querySelector('#title').value,
         isRead: isReadCheckBox.checked,
-        rating: isReadCheckBox.checked ? Number(ratingInput.value) : null
+        score: isReadCheckBox.checked ? Number(scoreInput.value) : null
     };
 
     try {
         await postBook(newBook);
 
         form.reset();
-        ratingInput.disabled = true;
+        scoreInput.disabled = true;
 
         await loadBooks();
     }

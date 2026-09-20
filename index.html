@@ -1,24 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BE26-JS2-GOODREADS-DZEMILA-BESLIJA</title>
-    <script src="main.js" type="module"></script>
-</head>
-<body>
+    <script src="src/main.js" type="module"></script>
+    <link rel="stylesheet" href="src/style.css">
+  </head>
+  <body>
+    <header>
+  
     <h1>Goodreads</h1>
-    <div>
-        <p>BOOKS</p>
+    <p>My book collection</p>
+    </header>
+    <main>
+        <p class="section-title">BOOKS</p>
         <ul id="bookList"></ul>
-    </div>
+   
     <form id="bookForm">
-        <input type="text" id="author" placeholder="Author" required>
-        <input type="text" id="title" placeholder="Title" required>
-        <label for="isRead">Read</label>
-        <input type="checkbox" id="isRead">
-        <input type="number" id="rating" placeholder="Rating" min="1" max="5" disabled>
-        <button type="submit">Add Book</button>
+      <input type="text" id="author" placeholder="Author" required />
+      <input type="text" id="title" placeholder="Title" required />
+      <label for="isRead">Read</label>
+      <input type="checkbox" id="isRead" />
+      <select id="score" disabled>
+        <option value="">Score</option>
+        <option value="1">"Your rating: ⭐</option>
+        <option value="2">⭐⭐</option>
+        <option value="3">⭐⭐⭐</option>
+        <option value="4">⭐⭐⭐⭐</option>
+        <option value="5">⭐⭐⭐⭐⭐</option>
+      </select>
+      <button type="submit">Add Book</button>
     </form>
-</body>
+     </main>
+  </body>
 </html>

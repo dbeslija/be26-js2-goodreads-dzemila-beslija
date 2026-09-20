@@ -4,15 +4,15 @@ export class Books {
     #title;
     #author;
     #isRead;
-    #rating;
+    #score;
     #url
 
-    constructor(id, title, author, isRead, rating) {
+    constructor(id, title, author, isRead, score) {
         this.#id = id;
         this.#title = title;
         this.#author = author;
         this.#isRead = isRead;
-        this.#rating = rating;
+        this.#score = score;
         this.#url = `${baseURL}/${this.#id}.json`;
     }
 
@@ -71,8 +71,8 @@ export class Books {
         return this.#isRead;
     }
 
-    getRating() {
-        return this.#rating;
+    getScore() {
+        return this.#score;
     }
 }
 
