@@ -1,24 +1,44 @@
-import { Books } from './books.js';
+import { Book } from './book.js';
+import { patchScore } from './firebaserequests.js';
 
 export function createBookCard(book) {
+
     const cardDiv = document.createElement('div');
+    cardDiv.classList.add('book-card');
+
     const bookTitle = document.createElement('p');
-    const authorP = document.createElement('p');
-    const readP = document.createElement('p');
-    const scoreP = document.createElement('p');
-    const delBtn = document.createElement('button');
-
-    cardDiv.append(bookTitle, authorP, readP, scoreP, delBtn);
-
     bookTitle.innerText = book.getTitle();
+
+    const authorP = document.createElement('p');
     authorP.innerText = `By: ${book.getAuthor()}`;
-    readP.innerText = book.getIsRead() ? 'Read' : 'Want to Read';
 
-    scoreP.innerText = book.getScore() !== undefined
-        ? '⭐'.repeat(book.getScore())
-        : 'Not rated';
+    const isReadLabel = document.createElement('label');
+    isReadLabel.textContent = "Read";
+    const isReadCheckbox = document.createElement('input');
+    isReadCheckbox.type = "checkbox";
+    isReadCheckbox.checked = book.getIsRead();
+    isReadCheckbox.id = `isRead${book.getId()}`
+    isReadLabel.htmlFor = isReadCheckbox.id;
 
+    const scoreContainer = document.createElement('div');
+    scoreContainer.classList.add('score-container');
+
+    renderRatingStars(book, scoreContainer);
+
+
+    isReadCheckbox.addEventListener('change', async () => {
+        try {
+            await book.toggleIsRead();
+            renderRatingStars(book, scoreContainer);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    });
+
+    const delBtn = document.createElement('button');
     delBtn.innerText = 'Remove book';
+
 
     delBtn.addEventListener('click', async () => {
         try {
@@ -30,24 +50,57 @@ export function createBookCard(book) {
         }
     });
 
+    cardDiv.append(bookTitle, authorP, isReadLabel, isReadCheckbox, scoreContainer, delBtn);
+
     return cardDiv;
 }
 
-export function showAllBooks(books) {
+function renderRatingStars(book, scoreContainer) {
+    scoreContainer.innerHTML = '';
+    if (!book.getIsRead()) {
+        return;
+    }
+
+    const score = book.getScore();
+
+    for (let starNumber = 1; starNumber <= 5; starNumber++) {
+        const scoreDiv = document.createElement('div');
+        scoreDiv.innerText = '★';
+        scoreDiv.id = starNumber;
+
+        if (scoreDiv.id <= score) {
+            scoreDiv.classList.add('rated');
+        } else {
+            scoreDiv.classList.add('unrated');
+        }
+
+        scoreContainer.appendChild(scoreDiv);
+
+        scoreDiv.addEventListener('click', async () => {
+            try {
+                await book.setScore(starNumber);
+                renderRatingStars(book, scoreContainer);
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    }
+}
+
+export function showAllBooks(firebaseBookObject) {
     const bookList = document.querySelector('#bookList');
 
     bookList.innerHTML = '';
 
-    if (!books) {
+    if (!firebaseBookObject) {
         bookList.innerHTML = '<p>No books yet!</p>';
         return;
     }
 
+    for (const id in firebaseBookObject) {
+        const bookData = firebaseBookObject[id];
 
-    for (const id in books) {
-        const bookData = books[id];
-
-        const book = new Books(
+        const book = new Book(
             id,
             bookData.title,
             bookData.author,

@@ -1,172 +1,66 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    font-family: Georgia, 'Times New Roman', serif;
-    background-color: #f6f1e7;   /* varm "bokig" beige */
-    color: #333;
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #f6f1e7;
+  color: #333;
 }
 
-/* ---- Rubrik ---- */
-.app-header {
-    text-align: center;
-    padding: 50px 20px 20px;
-}
-
-.app-header h1 {
-    font-size: 3.5rem;
-    color: #553b08;
-    letter-spacing: 2px;
-}
-
-.subtitle {
-    color: #8a7a5c;
-    font-style: italic;
-    margin-top: 6px;
-}
-
-/* ---- Formulär ---- */
-.form-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+h1,
+h2 {
+  text-align: center;
 }
 
 #bookForm {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-    background: white;
-    padding: 16px 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px auto;
 }
 
-#bookForm input[type="text"],
-#bookForm select {
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-#score {
-    width: 140px;
-}
-
-#score:disabled {
-    opacity: 0.5;
+#bookForm input {
+  width: 150px;
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 #bookForm button {
-    padding: 8px 16px;
-    background: #553b08;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-#bookForm button:hover {
-    background: #6d4c0d;
-}
-
-/* ---- Boklistan som GRID ---- */
-.section-title {
-    text-align: center;
-    font-weight: bold;
-    letter-spacing: 3px;
-    color: #553b08;
-    margin: 20px 0;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 #bookList {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
 }
 
-/* ---- Själva bokkortet ---- */
 .book-card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    transition: transform 0.15s, box-shadow 0.15s;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.book-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+.score-container {
+  display: flex;
+  gap: 3px;
 }
 
-.book-card h3 {
-    font-size: 1.2rem;
-    color: #2c1e05;
+.rated,
+.unrated {
+  font-size: 30px;
 }
 
-.book-author {
-    color: #777;
-    font-size: 0.95rem;
+.rated {
+  color: gold;
 }
 
-.book-score {
-    font-size: 1.1rem;
-    letter-spacing: 2px;
-}
-
-/* ---- Knappar på kortet ---- */
-.card-buttons {
-    margin-top: auto;   /* trycker knapparna till botten av kortet */
-    display: flex;
-    gap: 8px;
-}
-
-.btn-read {
-    flex: 1;
-    padding: 8px;
-    border: none;
-    border-radius: 6px;
-    background: #3e7d4f;
-    color: white;
-    cursor: pointer;
-}
-
-.btn-want {
-    flex: 1;
-    padding: 8px;
-    border: 2px solid #553b08;
-    border-radius: 6px;
-    background: transparent;
-    color: #553b08;
-    cursor: pointer;
-}
-
-.btn-read:hover { background: #2f6540; }
-.btn-want:hover { background: #553b08; color: white; }
-
-.btn-remove {
-    padding: 8px 10px;
-    border: none;
-    border-radius: 6px;
-    background: #eee;
-    color: #a33;
-    cursor: pointer;
-}
-
-.btn-remove:hover {
-    background: #a33;
-    color: white;
+.unrated {
+  color: lightgray;
 }

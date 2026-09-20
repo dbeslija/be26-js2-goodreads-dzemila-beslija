@@ -23,7 +23,50 @@ export async function postBook(newBook) {
     }
 }
 
+export async function patchScore(bookUrl, score) {
+    const options = {
+        method: 'PATCH',
+        body: JSON.stringify({ score: score }),
+        headers: {
+            'Content-type': 'application/json'
+        }
+    };
+    try {
+        const response = await fetch(bookUrl, options);
+        if (!response.ok) {
+            throw new Error('Patch failed')
+        }
+        const data = await response.json()
+        return 'Patch succeded!';
 
+    }
+    catch (error) {
+        throw error;
+    }
+}
+
+
+export async function patchIsRead(bookUrl, newIsRead) {
+    const options = {
+        method: 'PATCH',
+        body: JSON.stringify({ isRead: newIsRead }),
+        headers: {
+            'Content-type': 'application/json'
+        }
+    };
+    try {
+        const response = await fetch(bookUrl, options);
+        if (!response.ok) {
+            throw new Error('Patch failed')
+        }
+        const data = await response.json()
+        return 'Patch succeded!';
+
+    }
+    catch (error) {
+        throw error;
+    }
+}
 
 export async function getAllBooks() {
     try {
