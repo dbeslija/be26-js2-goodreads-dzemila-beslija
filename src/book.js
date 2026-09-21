@@ -1,4 +1,5 @@
 import { baseURL, patchScore, patchIsRead } from "./firebaserequests.js";
+
 export class Book {
     #id;
     #title;
