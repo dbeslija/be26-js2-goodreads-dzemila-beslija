@@ -1,4 +1,4 @@
-import { createBook, loadBooks } from "./bookService.js";
+import { createBook, loadBooks } from "./bookservice.js";
 
 const form = document.querySelector('#bookForm');
 form.addEventListener('submit', createBook);

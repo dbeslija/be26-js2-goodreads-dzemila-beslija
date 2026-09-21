@@ -13,9 +13,9 @@ För utvecklaren:
 
 Projektet är byggt med HTML, CSS och Javascript och använder Firebase Realtime Database för att lagra böcker.
 
-*main.js -Hanterar startsidan och formuläret
+*main.js -Startpunkten för appen, visar befintliga bövker
+*bookservies -Hämtar och visar böcker, skapar och sparar böcker
 *firebaserequest.js -Hanterar kommunikation med Firebase
 *books.js -Innehåller Book-klassen och funktioner för enskilda böcker
 *render.js- Skapar och uppdatera innehållet på sidan
 
-Projektet använder Vite och Javascript moduler.
