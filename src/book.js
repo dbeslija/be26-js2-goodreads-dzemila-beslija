@@ -16,18 +16,21 @@ export class Book {
         this.#url = `${baseURL}/${this.#id}.json`;
     }
 
+    //ska det vara här?
     async toggleIsRead() {
         const isReadToggled = !this.#isRead;
         await patchIsRead(this.#url, isReadToggled);
         this.#isRead = isReadToggled;
     }
-
+    
+    //ska det vara här?
     async setScore(score) {
         const newScore = score
         await patchScore(this.#url, newScore);
         this.#score = newScore;
     }
-
+    
+    //ska det vara här?
     async deleteBook() {
         const options = {
             method: 'DELETE',

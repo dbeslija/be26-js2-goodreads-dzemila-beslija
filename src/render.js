@@ -1,8 +1,32 @@
 import { Book } from './book.js';
 
+export function showAllBooks(firebaseBookObject) {
+    const bookList = document.querySelector('#bookList');
+    bookList.innerHTML = '';
 
-export function createBookCard(book) {
+    if (!firebaseBookObject) {
+        bookList.innerHTML = '<p>No books yet!</p>';
+        return;
+    }
 
+    for (const id in firebaseBookObject) {
+        const bookData = firebaseBookObject[id];
+
+        const book = new Book(
+            id,
+            bookData.title,
+            bookData.author,
+            bookData.isRead,
+            bookData.score,
+        );
+
+        const card = createBookCard(book);
+
+        bookList.append(card);
+    }
+}
+
+function createBookCard(book) {
     const cardDiv = document.createElement('div');
     cardDiv.classList.add('book-card');
 
@@ -26,19 +50,9 @@ export function createBookCard(book) {
     renderRatingStars(book, scoreContainer);
 
     scoreContainer.addEventListener('click', async (event) => {
-    const score = event.target.dataset.score;
-
-    if (!score) {
-        return;
-    }
-    try {
-        await book.setScore(score);
-        renderRatingStars(book, scoreContainer);
-    } catch (error) {
-        console.log(error)
-    }
-});
-
+        const score = event.target.dataset.score;
+        await updateBookScore(book, scoreContainer, score);
+    });
 
     isReadCheckbox.addEventListener('change', async () => {
         try {
@@ -52,7 +66,6 @@ export function createBookCard(book) {
 
     const delBtn = document.createElement('button');
     delBtn.innerText = 'Remove book';
-
 
     delBtn.addEventListener('click', async () => {
         try {
@@ -93,30 +106,15 @@ function renderRatingStars(book, scoreContainer) {
     }
 }
 
-
-export function showAllBooks(firebaseBookObject) {
-    const bookList = document.querySelector('#bookList');
-
-    bookList.innerHTML = '';
-
-    if (!firebaseBookObject) {
-        bookList.innerHTML = '<p>No books yet!</p>';
+async function updateBookScore(book, scoreContainer, score) {
+    if (!score) {
         return;
     }
 
-    for (const id in firebaseBookObject) {
-        const bookData = firebaseBookObject[id];
-
-        const book = new Book(
-            id,
-            bookData.title,
-            bookData.author,
-            bookData.isRead,
-            bookData.score,
-        );
-
-        const card = createBookCard(book);
-
-        bookList.append(card);
+    try {
+        await book.setScore(score);
+        renderRatingStars(book, scoreContainer);
+    } catch (error) {
+        console.log(error);
     }
 }
