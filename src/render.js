@@ -25,6 +25,20 @@ export function createBookCard(book) {
 
     renderRatingStars(book, scoreContainer);
 
+    scoreContainer.addEventListener('click', async (event) => {
+    const score = event.target.dataset.score;
+
+    if (!score) {
+        return;
+    }
+    try {
+        await book.setScore(score);
+        renderRatingStars(book, scoreContainer);
+    } catch (error) {
+        console.log(error)
+    }
+});
+
 
     isReadCheckbox.addEventListener('change', async () => {
         try {
@@ -65,8 +79,9 @@ function renderRatingStars(book, scoreContainer) {
 
     for (let starNumber = 1; starNumber <= 5; starNumber++) {
         const scoreDiv = document.createElement('div');
+
         scoreDiv.innerText = '★';
-        scoreDiv.id = starNumber;
+        scoreDiv.dataset.score = starNumber;
 
         if (starNumber <= score) {
             scoreDiv.classList.add('rated');
@@ -75,17 +90,9 @@ function renderRatingStars(book, scoreContainer) {
         }
 
         scoreContainer.appendChild(scoreDiv);
-
-        scoreDiv.addEventListener('click', async () => {
-            try {
-                await book.setScore(starNumber);
-                renderRatingStars(book, scoreContainer);
-            } catch (error) {
-                console.log(error);
-            }
-        });
     }
 }
+
 
 export function showAllBooks(firebaseBookObject) {
     const bookList = document.querySelector('#bookList');
