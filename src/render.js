@@ -1,5 +1,5 @@
 import { Book } from './book.js';
-import { patchScore } from './firebaserequests.js';
+
 
 export function createBookCard(book) {
 
@@ -68,7 +68,7 @@ function renderRatingStars(book, scoreContainer) {
         scoreDiv.innerText = '★';
         scoreDiv.id = starNumber;
 
-        if (scoreDiv.id <= score) {
+        if (starNumber <= score) {
             scoreDiv.classList.add('rated');
         } else {
             scoreDiv.classList.add('unrated');
