@@ -31,19 +31,18 @@ export async function patchScore(bookUrl, score) {
             'Content-type': 'application/json'
         }
     };
-    try {
-        const response = await fetch(bookUrl, options);
-        if (!response.ok) {
-            throw new Error('Patch failed')
-        }
-        const data = await response.json()
-        return 'Patch succeded!';
 
+    const response = await fetch(bookUrl, options);
+
+    if (!response.ok) {
+        throw new Error('Patch failed')
     }
-    catch (error) {
-        throw error;
-    }
+
+    const data = await response.json()
+    return 'Patch succeded!';
+
 }
+
 
 
 export async function patchIsRead(bookUrl, newIsRead) {
@@ -54,31 +53,28 @@ export async function patchIsRead(bookUrl, newIsRead) {
             'Content-type': 'application/json'
         }
     };
-    try {
-        const response = await fetch(bookUrl, options);
-        if (!response.ok) {
-            throw new Error('Patch failed')
-        }
-        const data = await response.json()
-        return 'Patch succeded!';
 
+    const response = await fetch(bookUrl, options);
+
+    if (!response.ok) {
+        throw new Error('Patch failed')
     }
-    catch (error) {
-        throw error;
-    }
+
+    const data = await response.json()
+    return 'Patch succeded!';
+
 }
+
 
 export async function getAllBooks() {
-    try {
-        const response = await fetch(baseURL + '.json');
 
-        if (!response.ok) {
-            throw new Error('Fetching books failed');
-        }
-        const data = await response.json();
-        return data;
+    const response = await fetch(baseURL + '.json');
+
+    if (!response.ok) {
+        throw new Error('Fetching books failed');
     }
-    catch (error) {
-        throw error;
-    }
+
+    const data = await response.json();
+    return data;
 }
+
