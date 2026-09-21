@@ -19,6 +19,8 @@ form.addEventListener('submit', async event => {
     const newBook = {
         author: document.querySelector('#author').value,
         title: document.querySelector('#title').value,
+        isRead: false,
+        score: null,
     };
 
     try {
